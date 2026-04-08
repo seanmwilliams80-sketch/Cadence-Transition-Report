@@ -5,163 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio Transition Analysis | Cadence Wealth Partners</title>
 <style>
-  :root {
-    --navy: #003e6f;
-    --green: #8dc63f;
-    --gray: #6d6e71;
-    --light-navy: #e8f0f7;
-    --light-green: #f2f9e6;
-    --light-gray: #f5f5f6;
-    --red: #c0392b;
-    --light-red: #fdf0ef;
-    --white: #ffffff;
-    --border: #e0e0e0;
-    --text: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: var(--text); }
+:root{--navy:#003e6f;--green:#8dc63f;--gray:#6d6e71;--red:#c0392b;--white:#fff;--bg:#f0f4f8;--border:#e0e0e0;--light-navy:#e8f0f7;--light-green:#f2f9e6;--light-red:#fdf0ef}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:#1a1a1a}
+header{background:var(--navy);padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+.hdr-right{text-align:right;color:rgba(255,255,255,.7);font-size:12px}
+.hdr-right strong{color:#fff;display:block;font-size:13px;margin-bottom:2px}
+.hero{background:linear-gradient(135deg,#003e6f,#00538f);padding:28px 40px;border-bottom:4px solid var(--green)}
+.hero h1{color:#fff;font-size:22px;font-weight:700;margin-bottom:4px}
+.hero p{color:rgba(255,255,255,.75);font-size:13px}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
 
-  /* HEADER */
-  header { background: var(--navy); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; }
-  .logo-area { display: flex; align-items: center; gap: 14px; }
-  .logo-svg { height: 48px; }
-  .logo-text { color: white; }
-  .logo-text .firm { font-size: 22px; font-weight: 700; letter-spacing: 0.04em; }
-  .logo-text .sub { font-size: 11px; letter-spacing: 0.18em; color: rgba(255,255,255,0.7); text-transform: uppercase; margin-top: 2px; }
-  .header-right { text-align: right; color: rgba(255,255,255,0.75); font-size: 12px; }
-  .header-right .date { font-size: 13px; color: white; font-weight: 500; margin-bottom: 2px; }
+/* TOGGLE */
+.toggle-bar{display:flex;gap:0;background:#fff;border:1.5px solid var(--navy);border-radius:8px;overflow:hidden;margin-bottom:28px;width:fit-content}
+.tog-btn{padding:10px 32px;font-size:14px;font-weight:600;cursor:pointer;background:#fff;color:var(--navy);border:none;border-right:1.5px solid var(--navy);transition:all .15s}
+.tog-btn:last-child{border-right:none}
+.tog-btn.active{background:var(--navy);color:#fff}
+.account-panel{display:none}
+.account-panel.active{display:block}
 
-  /* HERO BAND */
-  .hero { background: linear-gradient(135deg, #003e6f 0%, #00538f 100%); padding: 32px 40px; border-bottom: 4px solid var(--green); }
-  .hero h1 { color: white; font-size: 24px; font-weight: 700; margin-bottom: 4px; }
-  .hero p { color: rgba(255,255,255,0.75); font-size: 14px; }
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:700px){.metrics{grid-template-columns:1fr 1fr}}
+.metric{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid var(--border);position:relative;overflow:hidden}
+.metric::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--green)}
+.m-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.m-value{font-size:24px;font-weight:700;color:var(--navy);line-height:1}
+.m-value.gain{color:#2e7d32}
+.m-value.loss{color:var(--red)}
+.m-value.warn{color:var(--red)}
+.m-sub{font-size:11px;color:var(--gray);margin-top:4px}
 
-  /* MAIN */
-  main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
+/* SECTION */
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--green);display:inline-block}
+section{margin-bottom:32px}
 
-  /* ALERT */
-  .alert { background: #fff8e6; border-left: 4px solid #f0a500; border-radius: 6px; padding: 14px 18px; margin-bottom: 28px; font-size: 13px; color: #7a5000; display: flex; gap: 10px; align-items: flex-start; }
-  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+/* CARDS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+.card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:18px}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.card-head h3{font-size:14px;font-weight:600;color:var(--navy)}
+.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.badge-red{background:var(--light-red);color:var(--red)}
+.badge-green{background:var(--light-green);color:#2e7d32}
 
-  /* SECTION LABEL */
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--green); display: inline-block; }
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;padding:6px 8px;border-bottom:1px solid var(--border);text-align:left}
+th.r{text-align:right}
+td{padding:7px 8px;border-bottom:1px solid #f0f0f0;font-size:13px}
+td.r{text-align:right;font-variant-numeric:tabular-nums}
+td.gain{text-align:right;color:#2e7d32;font-weight:500}
+td.loss{text-align:right;color:var(--red);font-weight:500}
+tr:last-child td{border-bottom:none}
+tr.total td{font-weight:700;background:#f8f8f8;border-top:1px solid var(--border);border-bottom:none}
 
-  section { margin-bottom: 36px; }
+/* TAX ESTIMATOR */
+.tax-card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:18px}
+.tax-intro{font-size:13px;color:var(--gray);margin-bottom:16px}
+.tax-intro strong{color:#1a1a1a}
+.bracket-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.bracket-btn{padding:7px 16px;border-radius:6px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:500;cursor:pointer;color:var(--gray);transition:all .15s}
+.bracket-btn:hover{border-color:var(--navy);color:var(--navy)}
+.bracket-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tax-result{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:550px){.tax-result{grid-template-columns:1fr}}
+.tax-box{border-radius:8px;padding:14px;text-align:center}
+.tb-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-weight:600}
+.tb-value{font-size:26px;font-weight:700}
+.tb-sub{font-size:11px;margin-top:3px}
+.tax-box.federal{background:var(--light-red)}
+.tax-box.federal .tb-label{color:var(--red)}
+.tax-box.federal .tb-value{color:var(--red)}
+.tax-box.federal .tb-sub{color:#e57373}
+.tax-box.state{background:#fff8e6}
+.tax-box.state .tb-label{color:#c07000}
+.tax-box.state .tb-value{color:#c07000}
+.tax-box.state .tb-sub{color:#d4a020}
+.tax-box.total{background:var(--light-navy)}
+.tax-box.total .tb-label{color:var(--navy)}
+.tax-box.total .tb-value{color:var(--navy)}
+.tax-box.total .tb-sub{color:#5588aa}
+.nc-note{font-size:12px;color:var(--gray);margin-top:12px;padding-top:10px;border-top:1px solid var(--border)}
 
-  /* METRIC CARDS */
-  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 0; }
-  @media(max-width:700px){ .metrics { grid-template-columns: 1fr 1fr; } }
-  .metric { background: white; border-radius: 10px; padding: 18px 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-  .metric::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--green); }
-  .metric .m-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
-  .metric .m-value { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
-  .metric .m-value.gain { color: #2e7d32; }
-  .metric .m-value.warn { color: #c0392b; }
-  .metric .m-sub { font-size: 11px; color: var(--gray); margin-top: 5px; }
+/* ALERT */
+.alert{background:#fff8e6;border-left:4px solid #f0a500;border-radius:6px;padding:12px 16px;margin-bottom:24px;font-size:13px;color:#7a5000}
 
-  /* TWO COL */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media(max-width:650px){ .two-col { grid-template-columns: 1fr; } }
+/* TABS */
+.tabs{display:flex;gap:0;margin-bottom:14px;border-bottom:2px solid var(--border)}
+.tab{padding:8px 18px;font-size:13px;font-weight:500;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab:hover{color:var(--navy)}
+.tab.active{color:var(--navy);border-bottom-color:var(--green);font-weight:600}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
 
-  /* CARDS */
-  .card { background: white; border-radius: 10px; border: 1px solid var(--border); padding: 20px; }
-  .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .card-head h3 { font-size: 14px; font-weight: 600; color: var(--navy); }
-  .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
-  .badge-red { background: var(--light-red); color: var(--red); }
-  .badge-green { background: var(--light-green); color: #2e7d32; }
-  .badge-navy { background: var(--light-navy); color: var(--navy); }
+/* TAG CLOUD */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;background:var(--light-navy);color:var(--navy);border:1px solid #c5d8ea}
 
-  /* TABLES */
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; }
-  th.r { text-align: right; }
-  td { padding: 7px 8px; border-bottom: 1px solid #f0f0f0; color: var(--text); font-size: 13px; }
-  td.r { text-align: right; font-variant-numeric: tabular-nums; }
-  td.gain { text-align: right; color: #2e7d32; font-weight: 500; font-variant-numeric: tabular-nums; }
-  td.loss { text-align: right; color: var(--red); font-weight: 500; font-variant-numeric: tabular-nums; }
-  tr:last-child td { border-bottom: none; }
-  tr.total td { font-weight: 700; background: var(--light-gray); border-top: 1px solid var(--border); border-bottom: none; }
+/* SUMMARY */
+.summary-box{background:linear-gradient(135deg,#003e6f,#005090);border-radius:12px;padding:24px 28px;color:#fff}
+.summary-box h3{font-size:15px;font-weight:700;margin-bottom:14px;color:var(--green)}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:550px){.summary-grid{grid-template-columns:1fr}}
+.summary-item{display:flex;gap:9px;align-items:flex-start}
+.summary-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px}
+.summary-item p{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+.summary-item strong{color:#fff}
 
-  /* TAX ESTIMATOR */
-  .tax-card { background: white; border-radius: 10px; border: 1px solid var(--border); padding: 20px; }
-  .tax-intro { font-size: 13px; color: var(--gray); margin-bottom: 18px; }
-  .tax-intro strong { color: var(--text); }
-
-  .bracket-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .bracket-btn { padding: 7px 16px; border-radius: 6px; border: 1.5px solid var(--border); background: white; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--gray); transition: all 0.15s; }
-  .bracket-btn:hover { border-color: var(--navy); color: var(--navy); }
-  .bracket-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
-
-  .tax-result { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-  @media(max-width:550px){ .tax-result { grid-template-columns: 1fr; } }
-  .tax-box { border-radius: 8px; padding: 16px; text-align: center; }
-  .tax-box .tb-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; font-weight: 600; }
-  .tax-box .tb-value { font-size: 28px; font-weight: 700; }
-  .tax-box .tb-sub { font-size: 11px; margin-top: 4px; }
-  .tax-box.federal { background: var(--light-red); }
-  .tax-box.federal .tb-label { color: var(--red); }
-  .tax-box.federal .tb-value { color: var(--red); }
-  .tax-box.federal .tb-sub { color: #e57373; }
-  .tax-box.state { background: #fff8e6; }
-  .tax-box.state .tb-label { color: #c07000; }
-  .tax-box.state .tb-value { color: #c07000; }
-  .tax-box.state .tb-sub { color: #d4a020; }
-  .tax-box.total { background: var(--light-navy); }
-  .tax-box.total .tb-label { color: var(--navy); }
-  .tax-box.total .tb-value { color: var(--navy); }
-  .tax-box.total .tb-sub { color: #5588aa; }
-
-  .nc-note { font-size: 12px; color: var(--gray); margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
-
-  /* TAG CLOUD */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .tag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 5px; background: var(--light-navy); color: var(--navy); border: 1px solid #c5d8ea; }
-
-  /* SUMMARY BOX */
-  .summary-box { background: linear-gradient(135deg, #003e6f, #005090); border-radius: 12px; padding: 28px 32px; color: white; }
-  .summary-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--green); }
-  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media(max-width:550px){ .summary-grid { grid-template-columns: 1fr; } }
-  .summary-item { display: flex; gap: 10px; align-items: flex-start; }
-  .summary-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 5px; }
-  .summary-item p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; }
-  .summary-item strong { color: white; }
-
-  /* FOOTER */
-  footer { background: var(--navy); color: rgba(255,255,255,0.55); text-align: center; padding: 20px 24px; font-size: 11px; line-height: 1.6; }
-  footer strong { color: rgba(255,255,255,0.8); }
-
-  /* TABS */
-  .tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 2px solid var(--border); }
-  .tab { padding: 9px 18px; font-size: 13px; font-weight: 500; color: var(--gray); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
-  .tab:hover { color: var(--navy); }
-  .tab.active { color: var(--navy); border-bottom-color: var(--green); font-weight: 600; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
+footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:18px 20px;font-size:11px;line-height:1.7}
+footer strong{color:rgba(255,255,255,.8)}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-area">
-    <!-- SVG recreation of Cadence Wealth Partners logo -->
-    <svg class="logo-svg" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
-      <!-- Bar chart icon -->
-      <g>
-        <rect x="200" y="38" width="10" height="18" rx="1" fill="#8dc63f" opacity="0.7"/>
-        <rect x="214" y="24" width="10" height="32" rx="1" fill="#8dc63f" opacity="0.85"/>
-        <rect x="228" y="12" width="10" height="44" rx="1" fill="#8dc63f"/>
-        <rect x="242" y="4" width="10" height="52" rx="1" fill="#8dc63f"/>
-      </g>
-      <!-- CADENCE text -->
-      <text x="0" y="42" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="38" fill="white" letter-spacing="1">CADENCE</text>
-      <!-- WEALTH PARTNERS subtext -->
-      <text x="2" y="58" font-family="'Segoe UI',Arial,sans-serif" font-weight="400" font-size="11" fill="rgba(255,255,255,0.7)" letter-spacing="4">WEALTH PARTNERS</text>
-    </svg>
-  </div>
-  <div class="header-right">
-    <div class="date">March 27, 2025</div>
+  <img src="https://raw.githubusercontent.com/seanmwilliams80-sketch/Cadence-Transition-Report/main/logo.png" alt="Cadence Wealth Partners" style="height:46px;width:auto;">
+  <div class="hdr-right">
+    <strong>April 8, 2026</strong>
     <div>Portfolio Transition Analysis</div>
     <div>Confidential — Prepared for Client Review</div>
   </div>
@@ -169,257 +131,465 @@
 
 <div class="hero">
   <h1>Tax Impact: 90/10 → 100/0 Allocation Transition</h1>
-  <p>Transitioning from a 90% equity / 10% bond model to a 100% equity model in your taxable account</p>
+  <p>Blair &amp; Erin Troutman &nbsp;|&nbsp; Two taxable accounts transitioning to a 100% equity model</p>
 </div>
 
 <main>
 
-  <div class="alert">
-    <span class="alert-icon">⚠️</span>
-    <span><strong>Important:</strong> All positions in your current portfolio are <strong>short-term</strong> (held less than one year). Any gains realized in this transition will be taxed at <strong>ordinary income rates</strong> — not the preferential long-term capital gains rate of 0–20%.</span>
-  </div>
+<div class="alert">
+  <strong>Important:</strong> All positions in both accounts are <strong>short-term</strong> (held less than one year unless noted). Any gains realized will be taxed at <strong>ordinary income rates</strong> — not the preferential long-term capital gains rate of 0–20%. A small number of lots in Account 38919 are long-term and will receive preferential rates where applicable.
+</div>
 
-  <!-- PORTFOLIO OVERVIEW -->
+<!-- TOGGLE -->
+<div class="toggle-bar">
+  <button class="tog-btn active" onclick="switchAccount('9252',this)">Account ...9252</button>
+  <button class="tog-btn" onclick="switchAccount('38919',this)">Account ...38919</button>
+</div>
+
+<!-- ===================== ACCOUNT 9252 ===================== -->
+<div id="panel-9252" class="account-panel active">
+
   <section>
-    <div class="section-label">Portfolio Overview</div>
+    <div class="sec-label">Portfolio Overview — Account 9252</div>
     <div class="metrics">
-      <div class="metric">
-        <div class="m-label">Current Portfolio Value</div>
-        <div class="m-value">$255,019</div>
-        <div class="m-sub">Taxable account</div>
-      </div>
-      <div class="metric">
-        <div class="m-label">Total Cost Basis</div>
-        <div class="m-value">$206,161</div>
-        <div class="m-sub">What you paid</div>
-      </div>
-      <div class="metric">
-        <div class="m-label">Total Embedded Gain</div>
-        <div class="m-value gain">+$48,858</div>
-        <div class="m-sub">Unrealized — not all triggered</div>
-      </div>
-      <div class="metric">
-        <div class="m-label">Holding Period</div>
-        <div class="m-value warn">Short-Term</div>
-        <div class="m-sub">All positions &lt;1 year</div>
-      </div>
+      <div class="metric"><div class="m-label">Portfolio Value</div><div class="m-value">$274,319</div><div class="m-sub">Taxable account</div></div>
+      <div class="metric"><div class="m-label">Total Embedded Gain</div><div class="m-value gain">+$64,051</div><div class="m-sub">Source: custodian (unrealized)</div></div>
+      <div class="metric"><div class="m-label">Short-Term G/L</div><div class="m-value gain">+$64,051</div><div class="m-sub">Gains $65,108 / Losses −$1,057</div></div>
+      <div class="metric"><div class="m-label">Long-Term G/L</div><div class="m-value" style="color:var(--gray);font-size:18px;">None</div><div class="m-sub">All positions &lt;1 year</div></div>
     </div>
   </section>
 
-  <!-- TRANSITION SUMMARY -->
   <section>
-    <div class="section-label">Transition Summary</div>
+    <div class="sec-label">Transition Summary</div>
     <div class="two-col">
       <div class="card">
-        <div class="card-head">
-          <h3>Positions Being Sold</h3>
-          <span class="badge badge-red">Tax Event</span>
-        </div>
+        <div class="card-head"><h3>Positions Being Sold</h3><span class="badge badge-red">Tax Event</span></div>
         <table>
-          <tr><td>Unique tickers liquidated</td><td class="r">192</td></tr>
-          <tr><td>Total market value sold</td><td class="r">$36,405</td></tr>
-          <tr><td>Short-term gains realized</td><td class="gain">+$2,962</td></tr>
-          <tr><td>Short-term losses realized</td><td class="loss">−$348</td></tr>
-          <tr class="total"><td>Net short-term gain / loss</td><td class="gain">+$2,614</td></tr>
+          <tr><td>Bond ETFs liquidated</td><td class="r">11 positions</td></tr>
+          <tr><td>Total bond market value</td><td class="r">$25,986</td></tr>
+          <tr><td>Net gain on bonds sold</td><td class="gain">+$493</td></tr>
+          <tr><td>Other equity positions sold</td><td class="r">~40 tickers</td></tr>
+          <tr><td>Short-term gains realized</td><td class="gain">+$3,241</td></tr>
+          <tr><td>Short-term losses realized</td><td class="loss">−$627</td></tr>
+          <tr class="total"><td>Net short-term G/L</td><td class="gain">+$2,614</td></tr>
         </table>
       </div>
       <div class="card">
-        <div class="card-head">
-          <h3>Positions Being Retained</h3>
-          <span class="badge badge-green">No Tax Event</span>
-        </div>
+        <div class="card-head"><h3>Positions Retained</h3><span class="badge badge-green">No Tax Event</span></div>
         <table>
-          <tr><td>Positions kept (model overlap)</td><td class="r">228</td></tr>
-          <tr><td>Embedded gains staying put</td><td class="gain">+$47,383</td></tr>
-          <tr><td>Embedded losses staying put</td><td class="loss">−$1,138</td></tr>
-          <tr class="total"><td>New positions to purchase</td><td class="r">37 tickers</td></tr>
+          <tr><td>Equity positions kept</td><td class="r">~185 tickers</td></tr>
+          <tr><td>Embedded gains staying put</td><td class="gain">+$56,849</td></tr>
+          <tr><td>Embedded losses staying put</td><td class="loss">−$614</td></tr>
+          <tr class="total"><td>Net untriggered embedded gain</td><td class="gain">+$56,235</td></tr>
         </table>
       </div>
     </div>
   </section>
 
-  <!-- TAX ESTIMATOR -->
   <section>
-    <div class="section-label">Interactive Tax Estimator</div>
+    <div class="sec-label">Bond Allocation Eliminated (10% sleeve)</div>
+    <div class="card">
+      <table>
+        <thead><tr><th>ETF</th><th>Description</th><th class="r">Market Value</th><th class="r">G / L</th><th>Term</th></tr></thead>
+        <tbody>
+          <tr><td>VTEB</td><td>Vanguard Tax-Exempt Bond</td><td class="r">$12,750</td><td class="gain">+$493</td><td>Short</td></tr>
+          <tr><td>AGG</td><td>iShares Core US Aggregate</td><td class="r">$3,408</td><td class="gain">+$95</td><td>Short</td></tr>
+          <tr><td>BNDX</td><td>Vanguard Total Intl Bond</td><td class="r">$5,736</td><td class="loss">−$69</td><td>Short</td></tr>
+          <tr><td>SCHP</td><td>Schwab TIPS ETF</td><td class="r">$846</td><td class="gain">+$22</td><td>Short</td></tr>
+          <tr><td>BND</td><td>Vanguard Total Bond Market</td><td class="r">$779</td><td class="loss">−$5</td><td>Short</td></tr>
+          <tr><td>JNK</td><td>SPDR High Yield Bond</td><td class="r">$143</td><td class="gain">+$1</td><td>Short</td></tr>
+          <tr><td>MUB</td><td>iShares National Muni Bond</td><td class="r">$173</td><td class="loss">−$1</td><td>Short</td></tr>
+          <tr><td>VWOB</td><td>Vanguard EM Govt Bond</td><td class="r">$313</td><td class="gain">+$18</td><td>Short</td></tr>
+          <tr><td>SPIP</td><td>State Street TIPS ETF</td><td class="r">$188</td><td class="gain">+$1</td><td>Short</td></tr>
+          <tr class="total"><td colspan="2">Total bond sleeve liquidated</td><td class="r">$25,336</td><td class="gain">+$555 net</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Interactive Tax Estimator — Account 9252</div>
     <div class="tax-card">
-      <p class="tax-intro">Based on a <strong>net short-term gain of $2,614</strong>, select your federal tax bracket to estimate your total tax cost for this transition.</p>
+      <p class="tax-intro">Based on a <strong>net short-term gain of $2,614</strong>, select your federal tax bracket to see the estimated tax cost.</p>
       <div class="bracket-selector">
-        <button class="bracket-btn" onclick="selectBracket(this, 0.22)">22% Bracket</button>
-        <button class="bracket-btn" onclick="selectBracket(this, 0.24)">24% Bracket</button>
-        <button class="bracket-btn active" onclick="selectBracket(this, 0.32)">32% Bracket</button>
-        <button class="bracket-btn" onclick="selectBracket(this, 0.37)">37% Bracket</button>
+        <button class="bracket-btn" onclick="calcTax('9252',this,0.22)">22% Bracket</button>
+        <button class="bracket-btn" onclick="calcTax('9252',this,0.24)">24% Bracket</button>
+        <button class="bracket-btn active" onclick="calcTax('9252',this,0.32)">32% Bracket</button>
+        <button class="bracket-btn" onclick="calcTax('9252',this,0.37)">37% Bracket</button>
       </div>
       <div class="tax-result">
-        <div class="tax-box federal">
-          <div class="tb-label">Federal Tax</div>
-          <div class="tb-value" id="fed-val">~$836</div>
-          <div class="tb-sub" id="fed-rate">32% ordinary income</div>
-        </div>
-        <div class="tax-box state">
-          <div class="tb-label">NC State Tax</div>
-          <div class="tb-value">~$124</div>
-          <div class="tb-sub">4.75% NC rate</div>
-        </div>
-        <div class="tax-box total">
-          <div class="tb-label">Total Estimated Tax</div>
-          <div class="tb-value" id="total-val">~$960</div>
-          <div class="tb-sub" id="pct-val">0.38% of portfolio</div>
-        </div>
+        <div class="tax-box federal"><div class="tb-label">Federal Tax</div><div class="tb-value" id="9252-fed">~$836</div><div class="tb-sub" id="9252-fed-rate">32% ordinary income</div></div>
+        <div class="tax-box state"><div class="tb-label">NC State Tax</div><div class="tb-value">~$124</div><div class="tb-sub">4.75% NC rate</div></div>
+        <div class="tax-box total"><div class="tb-label">Total Est. Tax</div><div class="tb-value" id="9252-total">~$960</div><div class="tb-sub" id="9252-pct">0.35% of portfolio</div></div>
       </div>
-      <p class="nc-note">* State tax estimate based on North Carolina's flat income tax rate of 4.75%. Federal estimates are for illustration only. Please consult your tax professional for your specific situation.</p>
+      <p class="nc-note">* Estimates based on net short-term gain of $2,614. NC flat income tax rate 4.75%. Please consult your tax professional for your specific situation.</p>
     </div>
   </section>
 
-  <!-- DETAIL TABS -->
   <section>
-    <div class="section-label">Transaction Detail</div>
+    <div class="sec-label">Transaction Detail — Account 9252</div>
     <div class="tabs">
-      <div class="tab active" onclick="showTab('gains')">Gains Realized</div>
-      <div class="tab" onclick="showTab('losses')">Losses Harvested</div>
-      <div class="tab" onclick="showTab('bonds')">Bond Allocation Removed</div>
-      <div class="tab" onclick="showTab('buys')">New Positions Added</div>
+      <div class="tab active" onclick="showTab('9252','gains',event)">Gains Realized</div>
+      <div class="tab" onclick="showTab('9252','losses',event)">Losses Harvested</div>
+      <div class="tab" onclick="showTab('9252','bonds',event)">Bonds Removed</div>
     </div>
-
-    <div id="gains" class="tab-panel active">
+    <div id="9252-gains" class="tab-panel active">
       <div class="card">
         <table>
-          <thead><tr><th>Ticker / Security</th><th class="r">Market Value</th><th class="r">Net Gain</th></tr></thead>
+          <thead><tr><th>Ticker</th><th>Description</th><th class="r">Market Value</th><th class="r">Net Gain</th></tr></thead>
           <tbody>
-            <tr><td>VTEB — Vanguard Muni Bond ETF (eliminated)</td><td class="r">$12,552</td><td class="gain">+$321</td></tr>
-            <tr><td>AGG — iShares Core US Aggregate (eliminated)</td><td class="r">$3,367</td><td class="gain">+$64</td></tr>
-            <tr><td>SCHP — Schwab TIPS ETF (eliminated)</td><td class="r">$839</td><td class="gain">+$14</td></tr>
-            <tr><td>USHY — iShares Broad USD High Yield (eliminated)</td><td class="r">$603</td><td class="gain">+$13</td></tr>
-            <tr><td>VWOB — Vanguard EM Govt Bond (eliminated)</td><td class="r">$305</td><td class="gain">+$12</td></tr>
-            <tr><td>GLW — Corning</td><td class="r">$226</td><td class="gain">+$158</td></tr>
-            <tr><td>WDC — Western Digital</td><td class="r">$172</td><td class="gain">+$151</td></tr>
-            <tr><td>SNDK — SanDisk</td><td class="r">$138</td><td class="gain">+$131</td></tr>
-            <tr><td>VLO — Valero Energy</td><td class="r">$204</td><td class="gain">+$117</td></tr>
-            <tr><td>WBD — Warner Bros Discovery</td><td class="r">$148</td><td class="gain">+$106</td></tr>
-            <tr><td>GM — General Motors</td><td class="r">$238</td><td class="gain">+$100</td></tr>
-            <tr><td>CMI — Cummins</td><td class="r">$162</td><td class="gain">+$77</td></tr>
-            <tr><td>NEM — Newmont</td><td class="r">$145</td><td class="gain">+$67</td></tr>
-            <tr><td>DELL — Dell Technologies</td><td class="r">$88</td><td class="gain">+$47</td></tr>
-            <tr><td>KEYS — Keysight Technologies</td><td class="r">$86</td><td class="gain">+$46</td></tr>
-            <tr><td>CAH — Cardinal Health</td><td class="r">$107</td><td class="gain">+$40</td></tr>
-            <tr><td>TRGP — Targa Resources</td><td class="r">$112</td><td class="gain">+$41</td></tr>
-            <tr><td>HAL — Halliburton</td><td class="r">$71</td><td class="gain">+$35</td></tr>
-            <tr><td>CTVA — Corteva</td><td class="r">$114</td><td class="gain">+$33</td></tr>
-            <tr><td>ROK — Rockwell Automation</td><td class="r">$91</td><td class="gain">+$33</td></tr>
-            <tr><td>DAL — Delta Air Lines</td><td class="r">$81</td><td class="gain">+$33</td></tr>
-            <tr><td>DVN — Devon Energy</td><td class="r">$67</td><td class="gain">+$32</td></tr>
-            <tr><td>OXY — Occidental Petroleum</td><td class="r">$71</td><td class="gain">+$32</td></tr>
-            <tr><td>ADM — Archer-Daniels-Midland</td><td class="r">$80</td><td class="gain">+$31</td></tr>
-            <tr><td>EBAY — eBay</td><td class="r">$107</td><td class="gain">+$31</td></tr>
-            <tr><td>IDXX — IDEXX Laboratories</td><td class="r">$91</td><td class="gain">+$30</td></tr>
-            <tr><td>ALB — Albemarle</td><td class="r">$41</td><td class="gain">+$29</td></tr>
-            <tr><td>MCHP — Microchip Technology</td><td class="r">$69</td><td class="gain">+$28</td></tr>
-            <tr><td>All other gain positions (100+)</td><td class="r">~$4,200</td><td class="gain">+$1,073</td></tr>
-            <tr class="total"><td>Total gains realized</td><td class="r">$24,575</td><td class="gain">+$2,962</td></tr>
+            <tr><td>NVDA</td><td>NVIDIA</td><td class="r">$10,906</td><td class="gain">+$4,380</td></tr>
+            <tr><td>VEA</td><td>Vanguard Developed Markets</td><td class="r">$79,519</td><td class="gain">+$22,064</td></tr>
+            <tr><td>SCHM</td><td>Schwab US Mid Cap ETF</td><td class="r">$11,931</td><td class="gain">+$3,184</td></tr>
+            <tr><td>VWO</td><td>Vanguard Emerging Markets</td><td class="r">$22,942</td><td class="gain">+$5,514</td></tr>
+            <tr><td>VTWO</td><td>Vanguard Russell 2000 ETF</td><td class="r">$6,409</td><td class="gain">+$1,959</td></tr>
+            <tr><td>AAPL</td><td>Apple</td><td class="r">$8,855</td><td class="gain">+$2,153</td></tr>
+            <tr><td>GOOG / GOOGL</td><td>Alphabet (both classes)</td><td class="r">$8,299</td><td class="gain">+$4,187</td></tr>
+            <tr><td>AMZN</td><td>Amazon</td><td class="r">$4,878</td><td class="gain">+$817</td></tr>
+            <tr><td>MSFT</td><td>Microsoft</td><td class="r">$6,011</td><td class="loss">−$159</td></tr>
+            <tr><td>META</td><td>Meta Platforms</td><td class="r">$3,109</td><td class="gain">+$409</td></tr>
+            <tr><td>JPM</td><td>JP Morgan Chase</td><td class="r">$1,892</td><td class="gain">+$460</td></tr>
+            <tr><td>BRK B</td><td>Berkshire Hathaway</td><td class="r">$1,629</td><td class="loss">−$26</td></tr>
+            <tr><td>LLY</td><td>Eli Lilly</td><td class="r">$1,633</td><td class="gain">+$399</td></tr>
+            <tr><td>CASY</td><td>Casey's General Stores</td><td class="r">$1,843</td><td class="gain">+$458</td></tr>
+            <tr><td>CAT</td><td>Caterpillar</td><td class="r">$905</td><td class="gain">+$564</td></tr>
+            <tr><td>All other positions (150+)</td><td></td><td class="r">~$90,000</td><td class="gain">+$12,000 est.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-
-    <div id="losses" class="tab-panel">
+    <div id="9252-losses" class="tab-panel">
       <div class="card">
+        <p style="font-size:13px;color:var(--gray);margin-bottom:12px;">These losses offset gains, reducing your net taxable amount.</p>
         <table>
-          <thead><tr><th>Ticker / Security</th><th class="r">Market Value</th><th class="r">Net Loss</th></tr></thead>
+          <thead><tr><th>Ticker</th><th>Description</th><th class="r">Market Value</th><th class="r">Net Loss</th></tr></thead>
           <tbody>
-            <tr><td>BNDX — Vanguard Intl Bond ETF (eliminated)</td><td class="r">$5,651</td><td class="loss">−$143</td></tr>
-            <tr><td>HUBS — HubSpot</td><td class="r">$284</td><td class="loss">−$47</td></tr>
-            <tr><td>TYL — Tyler Technologies</td><td class="r">$384</td><td class="loss">−$32</td></tr>
-            <tr><td>VRSK — Verisk Analytics</td><td class="r">$184</td><td class="loss">−$21</td></tr>
-            <tr><td>IAGG — iShares Intl Aggregate (eliminated)</td><td class="r">$1,401</td><td class="loss">−$14</td></tr>
-            <tr><td>BND — Vanguard Total Bond Market (eliminated)</td><td class="r">$771</td><td class="loss">−$11</td></tr>
-            <tr><td>INVH — Invitation Homes</td><td class="r">$262</td><td class="loss">−$9</td></tr>
-            <tr><td>MUB — iShares National Muni Bond (eliminated)</td><td class="r">$171</td><td class="loss">−$3</td></tr>
-            <tr><td>JNK — SPDR High Yield Bond (eliminated)</td><td class="r">$140</td><td class="loss">−$2</td></tr>
-            <tr><td>Other loss positions</td><td class="r">~$3,000</td><td class="loss">−$66</td></tr>
-            <tr class="total"><td>Total losses harvested</td><td class="r">$12,248</td><td class="loss">−$348</td></tr>
+            <tr><td>MSFT</td><td>Microsoft</td><td class="r">$6,011</td><td class="loss">−$159</td></tr>
+            <tr><td>HUBS</td><td>HubSpot</td><td class="r">$271</td><td class="loss">−$61</td></tr>
+            <tr><td>BRK B</td><td>Berkshire Hathaway</td><td class="r">$1,629</td><td class="loss">−$26</td></tr>
+            <tr><td>VRSK</td><td>Verisk Analytics</td><td class="r">$176</td><td class="loss">−$28</td></tr>
+            <tr><td>BNDX</td><td>Vanguard Intl Bond (bond sleeve)</td><td class="r">$5,736</td><td class="loss">−$69</td></tr>
+            <tr><td>WDAY</td><td>Workday</td><td class="r">$525</td><td class="loss">−$84</td></tr>
+            <tr><td>VRTX</td><td>Vertex Pharmaceuticals</td><td class="r">$240</td><td class="loss">−$21</td></tr>
+            <tr><td>TYL</td><td>Tyler Technologies</td><td class="r">$376</td><td class="loss">−$40</td></tr>
+            <tr><td>NKE</td><td>Nike</td><td class="r">$94</td><td class="loss">−$22</td></tr>
+            <tr><td>Other loss positions</td><td></td><td class="r">~$5,000</td><td class="loss">−$117</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-
-    <div id="bonds" class="tab-panel">
+    <div id="9252-bonds" class="tab-panel">
       <div class="card">
         <table>
           <thead><tr><th>ETF</th><th>Description</th><th class="r">Market Value</th><th class="r">G / L</th></tr></thead>
           <tbody>
-            <tr><td>VTEB</td><td>Vanguard Muni Bond</td><td class="r">$12,552</td><td class="gain">+$321</td></tr>
-            <tr><td>BNDX</td><td>Vanguard Intl Bond</td><td class="r">$5,651</td><td class="loss">−$143</td></tr>
-            <tr><td>AGG</td><td>iShares Core US Aggregate</td><td class="r">$3,367</td><td class="gain">+$64</td></tr>
-            <tr><td>IAGG</td><td>iShares Intl Aggregate</td><td class="r">$1,401</td><td class="loss">−$14</td></tr>
-            <tr><td>SCHP</td><td>Schwab TIPS ETF</td><td class="r">$839</td><td class="gain">+$14</td></tr>
-            <tr><td>BND</td><td>Vanguard Total Bond Market</td><td class="r">$771</td><td class="loss">−$11</td></tr>
-            <tr><td>USHY</td><td>iShares Broad USD High Yield</td><td class="r">$603</td><td class="gain">+$13</td></tr>
-            <tr><td>VWOB</td><td>Vanguard EM Govt Bond</td><td class="r">$305</td><td class="gain">+$12</td></tr>
-            <tr><td>SPIP</td><td>SPDR Portfolio TIPS</td><td class="r">$186</td><td class="loss">−$1</td></tr>
-            <tr><td>MUB</td><td>iShares National Muni Bond</td><td class="r">$171</td><td class="loss">−$3</td></tr>
-            <tr><td>JNK</td><td>SPDR Barclays High Yield</td><td class="r">$140</td><td class="loss">−$2</td></tr>
-            <tr class="total"><td colspan="2">Total bond allocation liquidated</td><td class="r">$25,986</td><td class="gain">+$251 net</td></tr>
+            <tr><td>VTEB</td><td>Vanguard Tax-Exempt Bond</td><td class="r">$12,750</td><td class="gain">+$493</td></tr>
+            <tr><td>AGG</td><td>iShares Core US Aggregate</td><td class="r">$3,408</td><td class="gain">+$95</td></tr>
+            <tr><td>BNDX</td><td>Vanguard Total Intl Bond</td><td class="r">$5,736</td><td class="loss">−$69</td></tr>
+            <tr><td>SCHP</td><td>Schwab TIPS ETF</td><td class="r">$846</td><td class="gain">+$22</td></tr>
+            <tr><td>BND</td><td>Vanguard Total Bond Market</td><td class="r">$779</td><td class="loss">−$5</td></tr>
+            <tr><td>JNK</td><td>SPDR High Yield Bond</td><td class="r">$143</td><td class="gain">+$1</td></tr>
+            <tr><td>MUB</td><td>iShares National Muni Bond</td><td class="r">$173</td><td class="loss">−$1</td></tr>
+            <tr><td>VWOB</td><td>Vanguard EM Govt Bond</td><td class="r">$313</td><td class="gain">+$18</td></tr>
+            <tr><td>SPIP</td><td>State Street TIPS</td><td class="r">$188</td><td class="gain">+$1</td></tr>
+            <tr class="total"><td colspan="2">Total bond sleeve</td><td class="r">$25,336</td><td class="gain">+$555 net</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Key Takeaways — Account 9252</div>
+    <div class="summary-box">
+      <h3>What This Means for Account 9252</h3>
+      <div class="summary-grid">
+        <div class="summary-item"><div class="summary-dot"></div><p>Only an estimated <strong>~$2,614 in net gains</strong> are triggered by this transition — a fraction of the <strong>$64,051</strong> total embedded gain confirmed by the custodian.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>The vast majority of embedded gains — over <strong>$61,000</strong> — remain untouched in retained positions and continue growing tax-deferred.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>Estimated all-in tax cost is <strong>less than 0.35% of portfolio value</strong> — a modest one-time cost for a meaningful allocation shift.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>All positions are confirmed short-term by the custodian, so <strong>waiting will not lower your tax rate</strong> unless held past the 1-year mark.</p></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end 9252 panel -->
+
+
+<!-- ===================== ACCOUNT 38919 ===================== -->
+<div id="panel-38919" class="account-panel">
+
+  <section>
+    <div class="sec-label">Portfolio Overview — Account 38919</div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Portfolio Value</div><div class="m-value">$376,021</div><div class="m-sub">Taxable account</div></div>
+      <div class="metric"><div class="m-label">Total Embedded Gain</div><div class="m-value gain">+$101,398</div><div class="m-sub">Source: custodian (unrealized)</div></div>
+      <div class="metric"><div class="m-label">Short-Term G/L</div><div class="m-value gain">+$52,364</div><div class="m-sub">Gains $57,424 / Losses −$5,060</div></div>
+      <div class="metric"><div class="m-label">Long-Term G/L</div><div class="m-value gain">+$49,034</div><div class="m-sub">Gains $49,214 / Losses −$180</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Transition Summary</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-head"><h3>Positions Being Sold</h3><span class="badge badge-red">Tax Event</span></div>
+        <table>
+          <tr><td>Bond / fixed income positions sold</td><td class="r">12 ETFs</td></tr>
+          <tr><td>Total bond market value</td><td class="r">$30,487</td></tr>
+          <tr><td>Net gain/loss on bonds sold</td><td class="loss">−$12 net</td></tr>
+          <tr><td>Short-term gains on other sells</td><td class="gain">+$4,819</td></tr>
+          <tr><td>Short-term losses on other sells</td><td class="loss">−$1,892</td></tr>
+          <tr><td>Long-term gains (preferential rate)</td><td class="gain">+$14,153</td></tr>
+          <tr><td>Long-term losses</td><td class="loss">−$99</td></tr>
+          <tr class="total"><td>Net short-term G/L</td><td class="gain">+$2,915</td></tr>
+          <tr class="total"><td>Net long-term G/L</td><td class="gain">+$14,054</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Positions Retained</h3><span class="badge badge-green">No Tax Event</span></div>
+        <table>
+          <tr><td>Equity positions kept</td><td class="r">~200+ tickers</td></tr>
+          <tr><td>Large index ETFs retained (IVV, IVW, IVE, IJH, IJR, IEMG, SPDW)</td><td class="r">$186,000+</td></tr>
+          <tr><td>Embedded gains staying put</td><td class="gain">+$116,265</td></tr>
+          <tr class="total"><td>Net untriggered embedded gain</td><td class="gain">+$116,265</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Bond Allocation Eliminated (10% sleeve)</div>
+    <div class="card">
+      <table>
+        <thead><tr><th>ETF</th><th>Description</th><th class="r">Market Value</th><th class="r">G / L</th><th>Term</th></tr></thead>
+        <tbody>
+          <tr><td>VTEB</td><td>Vanguard Tax-Exempt Bond</td><td class="r">$543</td><td class="gain">+$4</td><td>Short</td></tr>
+          <tr><td>AGG</td><td>iShares Core US Aggregate</td><td class="r">$316</td><td class="gain">+$2</td><td>Mixed</td></tr>
+          <tr><td>BNDX</td><td>Vanguard Total Intl Bond</td><td class="r">$863</td><td class="loss">−$16</td><td>Mixed</td></tr>
+          <tr><td>SCHP</td><td>Schwab TIPS ETF</td><td class="r">$490</td><td class="gain">+$7</td><td>Short</td></tr>
+          <tr><td>BND</td><td>Vanguard Total Bond Market</td><td class="r">$2,469</td><td class="gain">+$45</td><td>Short</td></tr>
+          <tr><td>MUB</td><td>iShares National Muni Bond</td><td class="r">$9,730</td><td class="gain">+$335</td><td>Short</td></tr>
+          <tr><td>VWOB</td><td>Vanguard EM Govt Bond</td><td class="r">$30</td><td class="loss">−$1</td><td>Mixed</td></tr>
+          <tr><td>IAGG</td><td>iShares Intl Aggregate</td><td class="r">$4,482</td><td class="loss">−$13</td><td>Short</td></tr>
+          <tr><td>EMB</td><td>iShares EM Bond ETF</td><td class="r">$121</td><td class="gain">+$8</td><td>Short</td></tr>
+          <tr><td>HYLB</td><td>Xtrackers USD High Yield</td><td class="r">$307</td><td class="gain">+$10</td><td>Short</td></tr>
+          <tr><td>USHY</td><td>iShares Broad USD HY</td><td class="r">$60</td><td class="loss">−$1</td><td>Mixed</td></tr>
+          <tr class="total"><td colspan="2">Total bond sleeve liquidated</td><td class="r">$19,411</td><td class="gain">+$380 net</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Interactive Tax Estimator — Account 38919</div>
+    <div class="tax-card">
+      <p class="tax-intro">This account has <strong>both short-term and long-term gains</strong>. Short-term gains ($2,915 net) are taxed at ordinary income rates. Long-term gains ($14,054 net) receive preferential rates. Select your brackets below.</p>
+      <div style="margin-bottom:10px;font-size:13px;font-weight:600;color:var(--navy)">Short-Term Bracket (ordinary income):</div>
+      <div class="bracket-selector" id="38919-st-btns">
+        <button class="bracket-btn" onclick="calcTax38919(this,'st',0.22)">22%</button>
+        <button class="bracket-btn" onclick="calcTax38919(this,'st',0.24)">24%</button>
+        <button class="bracket-btn active" onclick="calcTax38919(this,'st',0.32)">32%</button>
+        <button class="bracket-btn" onclick="calcTax38919(this,'st',0.37)">37%</button>
+      </div>
+      <div style="margin-bottom:10px;font-size:13px;font-weight:600;color:var(--navy)">Long-Term Bracket (capital gains):</div>
+      <div class="bracket-selector" id="38919-lt-btns">
+        <button class="bracket-btn" onclick="calcTax38919(this,'lt',0.0)">0%</button>
+        <button class="bracket-btn active" onclick="calcTax38919(this,'lt',0.15)">15%</button>
+        <button class="bracket-btn" onclick="calcTax38919(this,'lt',0.20)">20%</button>
+      </div>
+      <div class="tax-result">
+        <div class="tax-box federal"><div class="tb-label">Federal Tax (ST)</div><div class="tb-value" id="38919-st-val">~$933</div><div class="tb-sub" id="38919-st-rate">32% on $2,915</div></div>
+        <div class="tax-box" style="background:#f0f7e8;"><div class="tb-label" style="color:#2e7d32;">Federal Tax (LT)</div><div class="tb-value" id="38919-lt-val" style="color:#2e7d32;">~$2,108</div><div class="tb-sub" id="38919-lt-rate" style="color:#5aaa5a;">15% on $14,054</div></div>
+        <div class="tax-box total"><div class="tb-label">Total Est. Federal</div><div class="tb-value" id="38919-total">~$3,041</div><div class="tb-sub" id="38919-pct">+~$142 NC state</div></div>
+      </div>
+      <p class="nc-note">* NC state rate 4.75% applies to both ST and LT gains (NC does not have a separate capital gains rate), adding approximately <strong id="38919-nc">$806</strong> in state tax. Total combined federal + state estimate: <strong id="38919-combined">~$3,847</strong>. Please consult your tax professional for your specific situation.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Transaction Detail — Account 38919</div>
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('38919','gains',event)">ST Gains</div>
+      <div class="tab" onclick="showTab('38919','ltgains',event)">LT Gains</div>
+      <div class="tab" onclick="showTab('38919','losses',event)">Losses Harvested</div>
+      <div class="tab" onclick="showTab('38919','bonds',event)">Bonds Removed</div>
+    </div>
+
+    <div id="38919-gains" class="tab-panel active">
+      <div class="card">
+        <p style="font-size:13px;color:var(--gray);margin-bottom:10px;">Short-term positions being sold with gains — taxed at ordinary income rates.</p>
+        <table>
+          <thead><tr><th>Ticker</th><th>Description</th><th class="r">Market Value</th><th class="r">Net Gain</th></tr></thead>
+          <tbody>
+            <tr><td>NVDA</td><td>NVIDIA</td><td class="r">$11,482</td><td class="gain">+$4,391</td></tr>
+            <tr><td>LRCX</td><td>Lam Research</td><td class="r">$1,630</td><td class="gain">+$1,166</td></tr>
+            <tr><td>TSLA</td><td>Tesla</td><td class="r">$1,930</td><td class="gain">+$500</td></tr>
+            <tr><td>GE</td><td>GE Aerospace</td><td class="r">$726</td><td class="gain">+$288</td></tr>
+            <tr><td>GOOG</td><td>Alphabet Class C</td><td class="r">$4,408</td><td class="gain">+$2,121</td></tr>
+            <tr><td>GOOGL</td><td>Alphabet Class A</td><td class="r">$4,258</td><td class="gain">+$2,098</td></tr>
+            <tr><td>ANET</td><td>Arista Networks</td><td class="r">$324</td><td class="gain">+$157</td></tr>
+            <tr><td>XOM</td><td>Exxon Mobil</td><td class="r">$2,253</td><td class="gain">+$706</td></tr>
+            <tr><td>AMD</td><td>Advanced Micro Devices</td><td class="r">$1,064</td><td class="gain">+$628</td></tr>
+            <tr><td>WMB</td><td>Williams Companies</td><td class="r">$729</td><td class="gain">+$152</td></tr>
+            <tr><td>EWBC</td><td>East West Bancorp</td><td class="r">$397</td><td class="gain">+$139</td></tr>
+            <tr><td>WELL</td><td>Welltower</td><td class="r">$348</td><td class="gain">+$102</td></tr>
+            <tr><td>JPM</td><td>JP Morgan Chase</td><td class="r">$2,691</td><td class="gain">+$624</td></tr>
+            <tr><td>RTX</td><td>RTX Corporation</td><td class="r">$933</td><td class="gain">+$327</td></tr>
+            <tr><td>All other ST gain positions</td><td></td><td class="r">~$15,000</td><td class="gain">+est.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div id="buys" class="tab-panel">
+    <div id="38919-ltgains" class="tab-panel">
       <div class="card">
-        <p style="font-size:13px;color:var(--gray);margin-bottom:4px;">37 new equity positions being added to your portfolio. <strong style="color:var(--text);">No immediate tax impact</strong> — each establishes a new cost basis at today's purchase price.</p>
-        <div class="tag-cloud">
-          <span class="tag">ABT</span><span class="tag">ADBE</span><span class="tag">AIG</span><span class="tag">AJG</span><span class="tag">APO</span><span class="tag">APP</span><span class="tag">AXON</span><span class="tag">BAC</span><span class="tag">BDX</span><span class="tag">BR</span><span class="tag">BSX</span><span class="tag">BX</span><span class="tag">CARR</span><span class="tag">CHD</span><span class="tag">CI</span><span class="tag">CMG</span><span class="tag">CPRT</span><span class="tag">CRM</span><span class="tag">CTSH</span><span class="tag">DASH</span><span class="tag">DOW</span><span class="tag">ESS</span><span class="tag">FICO</span><span class="tag">FISV</span><span class="tag">INTU</span><span class="tag">KHC</span><span class="tag">KR</span><span class="tag">LII</span><span class="tag">NOW</span><span class="tag">NTNX</span><span class="tag">PANW</span><span class="tag">PG</span><span class="tag">PYPL</span><span class="tag">QCOM</span><span class="tag">SPGI</span><span class="tag">TEAM</span><span class="tag">ZTS</span>
-        </div>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:10px;">Long-term positions being sold — taxed at preferential capital gains rates (0%, 15%, or 20%).</p>
+        <table>
+          <thead><tr><th>Ticker</th><th>Purchase Date</th><th class="r">Market Value</th><th class="r">Net LT Gain</th></tr></thead>
+          <tbody>
+            <tr><td>IVE (many lots)</td><td>2022–2025</td><td class="r">$38,551</td><td class="gain">+$13,054</td></tr>
+            <tr><td>IVV (many lots)</td><td>2018–2025</td><td class="r">$18,686</td><td class="gain">+$12,130</td></tr>
+            <tr><td>IVW (many lots)</td><td>2022–2025</td><td class="r">$30,422</td><td class="gain">+$14,631</td></tr>
+            <tr><td>PIIVX</td><td>1/24/2023</td><td class="r">$1,944</td><td class="gain">+$249</td></tr>
+            <tr><td>RCIIX</td><td>9/15/2023</td><td class="r">$871</td><td class="loss">−$99</td></tr>
+            <tr><td>Other LT lots within short positions</td><td>Pre-4/2025</td><td class="r">~$5,000</td><td class="gain">+$218 est.</td></tr>
+            <tr class="total"><td colspan="2">Total long-term gains/losses</td><td class="r">~$95,474</td><td class="gain">+$14,054 net</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--gray);margin-top:10px;">Note: IVE, IVV, and IVW have many individual tax lots with varying purchase dates. Lots purchased before April 8, 2025 qualify for long-term treatment. The figures above reflect the aggregate long-term portion.</p>
+      </div>
+    </div>
+
+    <div id="38919-losses" class="tab-panel">
+      <div class="card">
+        <table>
+          <thead><tr><th>Ticker</th><th>Description</th><th class="r">Market Value</th><th class="r">Net Loss</th><th>Term</th></tr></thead>
+          <tbody>
+            <tr><td>UNH</td><td>UnitedHealth Group</td><td class="r">$761</td><td class="loss">−$671</td><td>Short</td></tr>
+            <tr><td>BSX</td><td>Boston Scientific</td><td class="r">$304</td><td class="loss">−$156</td><td>Short</td></tr>
+            <tr><td>ABT</td><td>Abbott Labs</td><td class="r">$555</td><td class="loss">−$126</td><td>Short</td></tr>
+            <tr><td>AJG</td><td>Arthur J. Gallagher</td><td class="r">$188</td><td class="loss">−$100</td><td>Short</td></tr>
+            <tr><td>FISV</td><td>Fiserv</td><td class="r">$147</td><td class="loss">−$402</td><td>Short</td></tr>
+            <tr><td>PGR</td><td>Progressive</td><td class="r">$353</td><td class="loss">−$147</td><td>Short</td></tr>
+            <tr><td>CRM</td><td>Salesforce</td><td class="r">$377</td><td class="loss">−$163</td><td>Short</td></tr>
+            <tr><td>TMUS</td><td>T-Mobile</td><td class="r">$397</td><td class="loss">−$133</td><td>Short</td></tr>
+            <tr><td>INTU</td><td>Intuit</td><td class="r">$266</td><td class="loss">−$132</td><td>Short</td></tr>
+            <tr><td>MOH</td><td>Molina Healthcare</td><td class="r">$48</td><td class="loss">−$65</td><td>Short</td></tr>
+            <tr><td>IT</td><td>Gartner</td><td class="r">$57</td><td class="loss">−$99</td><td>Short</td></tr>
+            <tr><td>RCIIX</td><td>Private Shares Fund</td><td class="r">$871</td><td class="loss">−$99</td><td>Long</td></tr>
+            <tr><td>Other loss positions</td><td></td><td class="r">~$3,000</td><td class="loss">−$300 est.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="38919-bonds" class="tab-panel">
+      <div class="card">
+        <table>
+          <thead><tr><th>ETF</th><th>Description</th><th class="r">Market Value</th><th class="r">G / L</th><th>Term</th></tr></thead>
+          <tbody>
+            <tr><td>MUB</td><td>iShares National Muni Bond</td><td class="r">$9,730</td><td class="gain">+$335</td><td>Short</td></tr>
+            <tr><td>IAGG</td><td>iShares Intl Aggregate</td><td class="r">$4,482</td><td class="loss">−$13</td><td>Short</td></tr>
+            <tr><td>BND</td><td>Vanguard Total Bond Market</td><td class="r">$2,469</td><td class="gain">+$45</td><td>Short</td></tr>
+            <tr><td>BNDX</td><td>Vanguard Total Intl Bond</td><td class="r">$863</td><td class="loss">−$16</td><td>Mixed</td></tr>
+            <tr><td>VTEB</td><td>Vanguard Tax-Exempt Bond</td><td class="r">$543</td><td class="gain">+$4</td><td>Short</td></tr>
+            <tr><td>SCHP</td><td>Schwab TIPS ETF</td><td class="r">$490</td><td class="gain">+$7</td><td>Short</td></tr>
+            <tr><td>HYLB</td><td>Xtrackers USD High Yield</td><td class="r">$307</td><td class="gain">+$10</td><td>Short</td></tr>
+            <tr><td>AGG</td><td>iShares Core US Aggregate</td><td class="r">$316</td><td class="gain">+$2</td><td>Mixed</td></tr>
+            <tr><td>EMB</td><td>iShares EM Bond</td><td class="r">$121</td><td class="gain">+$8</td><td>Short</td></tr>
+            <tr><td>USHY</td><td>iShares Broad USD HY</td><td class="r">$60</td><td class="loss">−$1</td><td>Mixed</td></tr>
+            <tr><td>VWOB</td><td>Vanguard EM Govt Bond</td><td class="r">$30</td><td class="loss">−$1</td><td>Mixed</td></tr>
+            <tr class="total"><td colspan="2">Total bond sleeve</td><td class="r">$19,411</td><td class="gain">+$380 net</td><td></td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- KEY TAKEAWAYS -->
   <section>
-    <div class="section-label">Key Takeaways</div>
+    <div class="sec-label">Key Takeaways — Account 38919</div>
     <div class="summary-box">
-      <h3>What This Means for You</h3>
+      <h3>What This Means for Account 38919</h3>
       <div class="summary-grid">
-        <div class="summary-item"><div class="summary-dot"></div><p>Only <strong>$2,614 in net gains</strong> are triggered — a fraction of your $48,858 in total embedded gains.</p></div>
-        <div class="summary-item"><div class="summary-dot"></div><p>The <strong>228 retained positions</strong> carrying $47,383 in embedded gains are untouched and continue growing tax-deferred.</p></div>
-        <div class="summary-item"><div class="summary-dot"></div><p>The estimated all-in tax cost is <strong>less than 0.4% of your portfolio value</strong> — a modest one-time cost for a meaningful allocation shift.</p></div>
-        <div class="summary-item"><div class="summary-dot"></div><p>The <strong>$348 in harvested losses</strong> offsets a portion of gains, reducing your net taxable amount.</p></div>
-        <div class="summary-item"><div class="summary-dot"></div><p><strong>37 new equity positions</strong> are added with fresh cost basis — no day-one tax exposure.</p></div>
-        <div class="summary-item"><div class="summary-dot"></div><p>Because all positions are short-term today, <strong>waiting longer will not lower your tax rate</strong> unless held past the 1-year mark.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>The custodian confirms <strong>$49,034 in long-term gains</strong> in this account — positions like IVE, IVV, and IVW held since 2018–2022 qualify for preferential capital gains rates of 0%, 15%, or 20%.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>Short-term embedded gains total <strong>$52,364</strong> — only a portion of this is triggered. The large index ETF positions (SPDW, IEMG, IJH, IJR) are <strong>retained</strong>, protecting the majority from a tax event.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>Estimated short-term triggered gains are <strong>~$2,915</strong> and long-term triggered gains are <strong>~$14,054</strong> — together representing a small fraction of the $101,398 total embedded gain.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>Significant loss harvesting opportunities exist — positions like FISV, CRM, UNH, and BSX carry meaningful losses that <strong>offset a portion of gains</strong>.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>NC taxes both short-term and long-term gains at the <strong>same 4.75% flat rate</strong> — no state-level preference for long-term gains.</p></div>
+        <div class="summary-item"><div class="summary-dot"></div><p>Total combined federal + state estimate for this account ranges from <strong>$3,600–$4,700</strong> depending on your tax brackets.</p></div>
       </div>
     </div>
   </section>
+
+</div><!-- end 38919 panel -->
 
 </main>
 
 <footer>
-  <strong>Cadence Wealth Partners</strong> · This document is confidential and prepared solely for the named client's review.<br>
+  <strong>Cadence Wealth Partners</strong> &middot; This document is confidential and prepared solely for the named client's review.<br>
   This is not tax advice. Please consult your tax professional regarding your individual circumstances.<br>
-  Past performance is not indicative of future results. All figures are estimates based on current portfolio data.
+  Past performance is not indicative of future results. All figures are estimates based on current portfolio data as of April 8, 2026.
 </footer>
 
 <script>
-  const NET_GAIN = 2614;
-  const STATE_TAX = 124;
-  const PORTFOLIO = 255019;
+function switchAccount(id, btn) {
+  document.querySelectorAll('.account-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tog-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
-  function selectBracket(btn, rate) {
-    document.querySelectorAll('.bracket-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const fed = Math.round(NET_GAIN * rate);
-    const total = fed + STATE_TAX;
-    const pct = ((total / PORTFOLIO) * 100).toFixed(2);
-    document.getElementById('fed-val').textContent = '~$' + fed.toLocaleString();
-    document.getElementById('fed-rate').textContent = (rate * 100) + '% ordinary income';
-    document.getElementById('total-val').textContent = '~$' + total.toLocaleString();
-    document.getElementById('pct-val').textContent = pct + '% of portfolio';
-  }
+function calcTax(acct, btn, rate) {
+  document.querySelectorAll('#panel-' + acct + ' .bracket-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const net = acct === '9252' ? 2614 : 2915;
+  const port = acct === '9252' ? 274319 : 376021;
+  const fed = Math.round(net * rate);
+  const state = Math.round(net * 0.0475);
+  const total = fed + state;
+  document.getElementById(acct + '-fed').textContent = '~$' + fed.toLocaleString();
+  document.getElementById(acct + '-fed-rate').textContent = (rate * 100) + '% ordinary income';
+  document.getElementById(acct + '-total').textContent = '~$' + total.toLocaleString();
+  document.getElementById(acct + '-pct').textContent = ((total / port) * 100).toFixed(2) + '% of portfolio';
+}
 
-  function showTab(id) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    event.target.classList.add('active');
+// 38919 has two separate bracket selectors
+var _38919_st = 0.32;
+var _38919_lt = 0.15;
+
+function calcTax38919(btn, type, rate) {
+  if (type === 'st') {
+    document.querySelectorAll('#38919-st-btns .bracket-btn').forEach(b => b.classList.remove('active'));
+    _38919_st = rate;
+  } else {
+    document.querySelectorAll('#38919-lt-btns .bracket-btn').forEach(b => b.classList.remove('active'));
+    _38919_lt = rate;
   }
+  btn.classList.add('active');
+  const stNet = 2915;
+  const ltNet = 14054;
+  const stFed = Math.round(stNet * _38919_st);
+  const ltFed = Math.round(ltNet * _38919_lt);
+  const ncTax = Math.round((stNet + ltNet) * 0.0475);
+  const totalFed = stFed + ltFed;
+  const combined = totalFed + ncTax;
+  document.getElementById('38919-st-val').textContent = '~$' + stFed.toLocaleString();
+  document.getElementById('38919-st-rate').textContent = (_38919_st * 100) + '% on $2,915';
+  document.getElementById('38919-lt-val').textContent = '~$' + ltFed.toLocaleString();
+  document.getElementById('38919-lt-rate').textContent = (_38919_lt * 100) + '% on $14,054';
+  document.getElementById('38919-total').textContent = '~$' + totalFed.toLocaleString();
+  document.getElementById('38919-pct').textContent = '+~$' + ncTax.toLocaleString() + ' NC state';
+  document.getElementById('38919-nc').textContent = '$' + ncTax.toLocaleString();
+  document.getElementById('38919-combined').textContent = '~$' + combined.toLocaleString();
+}
+
+function showTab(acct, id, e) {
+  const panel = document.getElementById('panel-' + acct);
+  panel.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  panel.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(acct + '-' + id).classList.add('active');
+  e.target.classList.add('active');
+}
 </script>
 </body>
 </html>
